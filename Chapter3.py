@@ -115,7 +115,7 @@ def softmax(a):
 Mnist 데이터셋을 이용하여 손글씨 숫자 인식하기
 """
 
-"""
+
 def img_show(img):
     pil_img = Image.fromarray(np.uint8(img))  #이미지 읽으려고 PIL 이미지로 변
     pil_img.show()
@@ -138,7 +138,7 @@ print(img.shape)
 img = img.reshape(28,28)  #이미지를 표시할 때는 다시 원래 형상으로 바꿔주어야 한다.
 
 img_show(img)
-"""
+
 
 """
 3.6.2 신경망의 추론 처리
