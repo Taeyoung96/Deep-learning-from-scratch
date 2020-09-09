@@ -1,4 +1,5 @@
 import numpy as np
+from common.functions import *
 
 """
 ReLU 클래스 구현
@@ -55,18 +56,65 @@ class Affine:
 
     def forward(self,x):
         #텐서 대응
+        self.original_x_shape = x.shape
+        x = x.reshape(x.shape[0], -1)
+        #reshape를 쓰는데 이차원 배열에 행이 x.shape[0]이고 열을 알아서 맞춰준다.
 
+        self.x = x
+        out = np.dot(x,self.W) + self.b
 
+        return out
+
+    def backward(self, dout):
+        dx = np.dot(dout, self.W.T)
+        self.dW = np.dot(self.x.T, dout)
+        self.db = np.sum(dout, axis=0)
+
+        dx = dx.reshape(*self.original_x_shape) # 입력 데이터 모양 변경(텐서 대응)
+
+        return  dx
+
+class SoftmaxWithLoss:
+    def __init__(self):
+        self.loss = None #손실함수
+        self.y = None
+        self.t = None
+
+    def forward(self, x, t):
+        self.t = t
+        self.y = softmax(x)
+        self.loss = cross_entropy_error(self.y, self.t)
+
+        return self.loss
+
+    def backward(self, dout = 1):
+        batch_size = t.shape[0]
+
+        if self.t.size == self.y.size:    #정답 레이블이 원-핫 인코딩일 때
+            dx = (self.y - self.t) / batch_size
+        else:
+            dx = self.y.copy()
+            dx[np.arange(batch_size), self.t] -= 1
+            dx = dx / batch_size
+
+        return dx
 
 if __name__ == '__main__':
     x = np.random.rand(2)
-    print(x)
+    #print(x)
     w = np.random.rand(2,3)
-    print(w)
+    #print(w)
 
     dY = np.array([[1,2,3],[4,5,6]])
     dB = np.sum(dY,axis=0)
 
-    print(dB)
+    #print(dB)
+
+    x = [np.arange(2),[0,1,2]]
+    """
+    list와 배열은 다른 것!
+    x는 리스트라서 배열에서 쓰는 함수를 사용할 수 없다.
+    """
+    print(x)
 
 
