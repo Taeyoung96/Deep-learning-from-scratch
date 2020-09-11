@@ -1,6 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
+초기값과 활성화 함수 간의 비교
+"""
+
 def sigmoid(x):
     return 1 / (1+np.exp(-x))
 

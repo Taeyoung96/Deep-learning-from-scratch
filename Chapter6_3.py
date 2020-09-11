@@ -8,6 +8,10 @@ from mnist import load_mnist
 from common.multi_layer_net_extend import MultiLayerNetExtend
 from common.optimizer import SGD, Adam
 
+"""
+MNIST 데이터셋으로 본 batch normalization 방법 비교
+"""
+
 (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
 
 # 학습 데이터를 줄임

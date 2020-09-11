@@ -8,6 +8,11 @@ from common.util import smooth_curve
 from common.multi_layer_net import MultiLayerNet
 from common.optimizer import SGD
 
+
+"""
+MNIST 데이터 셋으로 본 가중치 초기화 방법 비교
+"""
+
 # 0. MNIST 데이터 읽기
 (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True)
 
